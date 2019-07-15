@@ -1,6 +1,0 @@
-endpoint: https://us1.prisma.sh/airbnbts/airbnb-typescript/dev
-datamodel: datamodel.prisma
-
-generate:
-  - generator: typescript-client
-    output: ./generated/prisma-client/
