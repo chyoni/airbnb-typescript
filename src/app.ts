@@ -2,11 +2,12 @@ import { GraphQLServer } from "graphql-yoga";
 import cors from "cors";
 import helmet from "helmet";
 import logger from "morgan";
+import schema from "./schema";
 
 class App {
   public app: GraphQLServer; //app 이라는 변수를 생성 이 app 변수의 타입은 GraphQlServer
   constructor() {
-    this.app = new GraphQLServer({}); //생성자 안에서 해당 변수를 가지고 GraphQLServer 객체 생성
+    this.app = new GraphQLServer({ schema }); //생성자 안에서 해당 변수를 가지고 GraphQLServer 객체 생성
     this.middlewares(); //private으로 만든 middelwars 함수를 실행
   }
   private middlewares = (): void => {
