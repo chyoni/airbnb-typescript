@@ -1,5 +1,5 @@
-import app from "./app";
 import "./env";
+import app from "./app";
 import { Options } from "graphql-yoga";
 
 const PORT: number | string = process.env.PORT || 4500;

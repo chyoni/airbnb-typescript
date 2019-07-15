@@ -3,6 +3,7 @@ import {
   ConfirmSecretResponse
 } from "src/types/graph";
 import { prisma } from "../../../../generated/prisma-client";
+import { generateToken } from "../../../../src/utils";
 
 export default {
   Mutation: {
@@ -15,7 +16,7 @@ export default {
         const user = await prisma.user({ email });
         if (user) {
           if (user.loginSecret === loginSecret) {
-            // token create
+            const token = generateToken(user.id);
             await prisma.updateUser({
               where: { email },
               data: { loginSecret: "" }
@@ -23,7 +24,7 @@ export default {
             return {
               ok: true,
               error: null,
-              token: "comming soon"
+              token
             };
           } else {
             return {

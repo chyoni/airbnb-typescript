@@ -33,5 +33,12 @@ export default {
         };
       }
     }
+  },
+  Query: {
+    something: (_, __, { request }) => {
+      const { user } = request;
+      console.log(user);
+      return true;
+    }
   }
 };
