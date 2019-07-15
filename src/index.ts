@@ -12,7 +12,7 @@ const appOptions: Options = {
   playground: PLAYGROUND,
   endpoint: ENDPOINT
 };
-const handleAppStart = () =>
+const handleAppStart = (): void =>
   console.log(`Server running on http://localhost:${PORT}/playground 🤗`);
 
 app.start(appOptions, handleAppStart);

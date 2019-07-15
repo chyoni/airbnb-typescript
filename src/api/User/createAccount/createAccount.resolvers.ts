@@ -35,9 +35,8 @@ export default {
     }
   },
   Query: {
-    something: (_, __, { request }) => {
-      const { user } = request;
-      console.log(user);
+    something: (_, __, { request, isAuthed }) => {
+      isAuthed(request);
       return true;
     }
   }
