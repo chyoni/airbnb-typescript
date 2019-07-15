@@ -1,5 +1,12 @@
+import { TestResponse } from "src/types/graph";
+
 export default {
   Query: {
-    Test: () => "TEST"
+    Test: (): TestResponse => {
+      return {
+        text: "Test",
+        error: false
+      };
+    }
   }
 };
