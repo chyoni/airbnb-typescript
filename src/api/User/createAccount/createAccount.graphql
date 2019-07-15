@@ -9,7 +9,7 @@ type Mutation {
     email: String!
     firstName: String!
     lastName: String!
-  ): CreateAccountResponse
+  ): CreateAccountResponse!
 }
 
 type Query {

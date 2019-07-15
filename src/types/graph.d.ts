@@ -1,4 +1,4 @@
-export const typeDefs = ["type User {\n  id: ID!\n  firstName: String!\n  lastName: String!\n  username: String!\n  email: String!\n  loginSecret: String\n  hostings: [Post!]!\n  reservations: [Reservation!]!\n  likes: [Like!]!\n  comments: [Comment!]!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Post {\n  id: ID!\n  thumbNail: String!\n  caption: String!\n  location: String!\n  host: User!\n  likes: [Like!]!\n  comments: [Comment!]!\n  maxPeopleCount: Int!\n  checkIn: String!\n  checkOut: String!\n  price: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Reservation {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Like {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Comment {\n  id: ID!\n  text: String!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype CreateAccountResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse\n}\n\ntype Query {\n  something: Boolean!\n}\n"];
+export const typeDefs = ["type User {\n  id: ID!\n  firstName: String!\n  lastName: String!\n  username: String!\n  email: String!\n  loginSecret: String\n  hostings: [Post!]!\n  reservations: [Reservation!]!\n  likes: [Like!]!\n  comments: [Comment!]!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Post {\n  id: ID!\n  thumbNail: String!\n  caption: String!\n  location: String!\n  host: User!\n  likes: [Like!]!\n  comments: [Comment!]!\n  maxPeopleCount: Int!\n  checkIn: String!\n  checkOut: String!\n  price: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Reservation {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Like {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Comment {\n  id: ID!\n  text: String!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype ConfirmSecretResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!\n  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!\n  requestSecret(email: String!): RequestSecretResponse!\n}\n\ntype CreateAccountResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Query {\n  something: Boolean!\n}\n\ntype RequestSecretResponse {\n  ok: Boolean!\n  error: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -6,7 +6,14 @@ export interface Query {
 }
 
 export interface Mutation {
-  createAccount: CreateAccountResponse | null;
+  confirmSecret: ConfirmSecretResponse;
+  createAccount: CreateAccountResponse;
+  requestSecret: RequestSecretResponse;
+}
+
+export interface ConfirmSecretMutationArgs {
+  email: string;
+  loginSecret: string;
 }
 
 export interface CreateAccountMutationArgs {
@@ -16,7 +23,22 @@ export interface CreateAccountMutationArgs {
   lastName: string;
 }
 
+export interface RequestSecretMutationArgs {
+  email: string;
+}
+
+export interface ConfirmSecretResponse {
+  ok: boolean;
+  error: string | null;
+  token: string | null;
+}
+
 export interface CreateAccountResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface RequestSecretResponse {
   ok: boolean;
   error: string | null;
 }

@@ -54,15 +54,28 @@ type Comment {
   updatedAt: String!
 }
 
+type ConfirmSecretResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!
+  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!
+  requestSecret(email: String!): RequestSecretResponse!
+}
+
 type CreateAccountResponse {
   ok: Boolean!
   error: String
 }
 
-type Mutation {
-  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse
-}
-
 type Query {
   something: Boolean!
+}
+
+type RequestSecretResponse {
+  ok: Boolean!
+  error: String
 }
