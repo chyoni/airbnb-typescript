@@ -1,4 +1,56 @@
 type User {
   id: ID! @id
-  name: String!
+  firstName: String!
+  lastName: String!
+  username: String! @unique
+  email: String! @unique
+  loginSecret: String 
+  hostings: [Post!]! @relation(name: "HostingsByUser", onDelete: CASCADE)
+  reservations: [Reservation!]! @relation(name: "ReservesByUser", onDelete: CASCADE)
+  likes: [Like!]! @relation(name: "LikesByUser", onDelete: CASCADE)
+  comments: [Comment!]! @relation(name: "CommentsByUser", onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt 
 }
+
+type Post {
+  id: ID! @id
+  thumbNail: String!
+  caption: String!
+  location: String!
+  host: User! @unique @relation(name: "HostingsByUser")
+  likes: [Like!]! @relation(name: "LikesOfPost", onDelete: CASCADE)
+  comments: [Comment!]! @relation(name: "CommentsOfPost", onDelete: CASCADE)
+  maxPeopleCount: Int!
+  checkIn: String! 
+  checkOut: String!
+  price: String!
+  createdAt: DateTime! @createdAt 
+  updatedAt: DateTime! @updatedAt
+}
+
+type Reservation {
+  id: ID! @id
+  post: Post! 
+  user: User! @relation(name: "ReservesByUser")
+  createdAt: DateTime! @createdAt 
+  updatedAt: DateTime! @updatedAt
+}
+
+type Like {
+  id: ID! @id
+  post: Post! @relation(name: "LikesOfPost")
+  user: User! @relation(name: "LikesByUser")
+  createdAt: DateTime! @createdAt 
+  updatedAt: DateTime! @updatedAt
+}
+
+type Comment {
+  id: ID! @id
+  text: String!
+  post: Post! @relation(name: "CommentsOfPost")
+  user: User! @relation(name: "CommentsByUser")
+  createdAt: DateTime! @createdAt 
+  updatedAt: DateTime! @updatedAt
+}
+
