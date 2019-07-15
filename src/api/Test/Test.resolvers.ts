@@ -1,10 +1,10 @@
-import { TestResponse } from "src/types/graph";
+import { TestResponse, TestQueryArgs } from "src/types/graph";
 
 export default {
   Query: {
-    Test: (): TestResponse => {
+    Test: (_, args: TestQueryArgs): TestResponse => {
       return {
-        text: "Test",
+        text: `Test ${args.name}`,
         error: false
       };
     }

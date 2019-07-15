@@ -4,5 +4,5 @@ type TestResponse {
 }
 
 type Query {
-  Test: TestResponse!
+  Test(name: String!): TestResponse!
 }
