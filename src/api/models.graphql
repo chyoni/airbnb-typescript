@@ -53,16 +53,3 @@ type Comment {
   createdAt: String!
   updatedAt: String!
 }
-
-type CreateAccountResponse {
-  ok: Boolean!
-  error: String
-}
-
-type Mutation {
-  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse
-}
-
-type Query {
-  something: Boolean!
-}
