@@ -2,6 +2,8 @@ type User {
   id: ID!
   firstName: String!
   lastName: String!
+  fullName: String
+  avatar: String
   username: String!
   email: String!
   loginSecret: String
@@ -63,6 +65,7 @@ type ConfirmSecretResponse {
 type Mutation {
   confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!
   createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!
+  editUser(firstName: String, lastName: String, avatar: String, username: String): EditUserResponse!
   requestSecret(email: String!): RequestSecretResponse!
 }
 
@@ -71,8 +74,14 @@ type CreateAccountResponse {
   error: String
 }
 
+type EditUserResponse {
+  ok: Boolean!
+  error: String
+}
+
 type Query {
-  MyProfile: User!
+  myProfile: User!
+  seeUser(username: String!): User!
 }
 
 type RequestSecretResponse {

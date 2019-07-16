@@ -1,14 +1,21 @@
-export const typeDefs = ["type User {\n  id: ID!\n  firstName: String!\n  lastName: String!\n  username: String!\n  email: String!\n  loginSecret: String\n  hostings: [Post!]!\n  reservations: [Reservation!]!\n  likes: [Like!]!\n  comments: [Comment!]!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Post {\n  id: ID!\n  thumbNail: String!\n  caption: String!\n  location: String!\n  host: User!\n  likes: [Like!]!\n  comments: [Comment!]!\n  maxPeopleCount: Int!\n  checkIn: String!\n  checkOut: String!\n  price: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Reservation {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Like {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Comment {\n  id: ID!\n  text: String!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype ConfirmSecretResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!\n  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!\n  requestSecret(email: String!): RequestSecretResponse!\n}\n\ntype CreateAccountResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Query {\n  MyProfile: User!\n}\n\ntype RequestSecretResponse {\n  ok: Boolean!\n  error: String\n}\n"];
+export const typeDefs = ["type User {\n  id: ID!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  avatar: String\n  username: String!\n  email: String!\n  loginSecret: String\n  hostings: [Post!]!\n  reservations: [Reservation!]!\n  likes: [Like!]!\n  comments: [Comment!]!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Post {\n  id: ID!\n  thumbNail: String!\n  caption: String!\n  location: String!\n  host: User!\n  likes: [Like!]!\n  comments: [Comment!]!\n  maxPeopleCount: Int!\n  checkIn: String!\n  checkOut: String!\n  price: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Reservation {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Like {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Comment {\n  id: ID!\n  text: String!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype ConfirmSecretResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!\n  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!\n  editUser(firstName: String, lastName: String, avatar: String, username: String): EditUserResponse!\n  requestSecret(email: String!): RequestSecretResponse!\n}\n\ntype CreateAccountResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Query {\n  myProfile: User!\n  seeUser(username: String!): User!\n}\n\ntype RequestSecretResponse {\n  ok: Boolean!\n  error: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
-  MyProfile: User;
+  myProfile: User;
+  seeUser: User;
+}
+
+export interface SeeUserQueryArgs {
+  username: string;
 }
 
 export interface User {
   id: string;
   firstName: string;
   lastName: string;
+  fullName: string | null;
+  avatar: string | null;
   username: string;
   email: string;
   loginSecret: string | null;
@@ -64,6 +71,7 @@ export interface Reservation {
 export interface Mutation {
   confirmSecret: ConfirmSecretResponse;
   createAccount: CreateAccountResponse;
+  editUser: EditUserResponse;
   requestSecret: RequestSecretResponse;
 }
 
@@ -79,6 +87,13 @@ export interface CreateAccountMutationArgs {
   lastName: string;
 }
 
+export interface EditUserMutationArgs {
+  firstName: string | null;
+  lastName: string | null;
+  avatar: string | null;
+  username: string | null;
+}
+
 export interface RequestSecretMutationArgs {
   email: string;
 }
@@ -90,6 +105,11 @@ export interface ConfirmSecretResponse {
 }
 
 export interface CreateAccountResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface EditUserResponse {
   ok: boolean;
   error: string | null;
 }

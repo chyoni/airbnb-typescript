@@ -1,3 +1,3 @@
 type Query {
-  MyProfile: User!
+  myProfile: User!
 }

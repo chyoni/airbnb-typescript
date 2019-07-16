@@ -5,6 +5,7 @@ export default {
     hostings: parent => prisma.user({ id: parent.id }).hostings(),
     reservations: parent => prisma.user({ id: parent.id }).reservations(),
     likes: parent => prisma.user({ id: parent.id }).likes(),
-    comments: parent => prisma.user({ id: parent.id }).comments()
+    comments: parent => prisma.user({ id: parent.id }).comments(),
+    fullName: parent => `${parent.firstName} ${parent.lastName}`
   }
 };

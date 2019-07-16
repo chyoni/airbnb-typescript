@@ -61,4 +61,4 @@ typings/
 .next
 *.txt
 generated
-*.yml
+prisma.yml
