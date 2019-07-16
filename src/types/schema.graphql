@@ -72,7 +72,7 @@ type CreateAccountResponse {
 }
 
 type Query {
-  something: Boolean!
+  MyProfile: User!
 }
 
 type RequestSecretResponse {

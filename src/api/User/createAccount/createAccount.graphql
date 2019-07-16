@@ -11,7 +11,3 @@ type Mutation {
     lastName: String!
   ): CreateAccountResponse!
 }
-
-type Query {
-  something: Boolean!
-}

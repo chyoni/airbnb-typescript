@@ -33,11 +33,5 @@ export default {
         };
       }
     }
-  },
-  Query: {
-    something: (_, __, { request, isAuthed }) => {
-      isAuthed(request);
-      return true;
-    }
   }
 };
