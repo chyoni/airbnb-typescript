@@ -7,12 +7,15 @@ type User {
   username: String!
   email: String!
   loginSecret: String
+  isSelf: Boolean!
   hostings: [Post!]!
   reservations: [Reservation!]!
   likes: [Like!]!
   comments: [Comment!]!
   createdAt: String!
   updatedAt: String!
+  createdDate: String
+  createdTime: String
 }
 
 type Post {
@@ -23,12 +26,17 @@ type Post {
   host: User!
   likes: [Like!]!
   comments: [Comment!]!
+  isLiked: Boolean!
+  likeCount: Int!
+  commentCount: Int!
   maxPeopleCount: Int!
   checkIn: String!
   checkOut: String!
   price: String!
   createdAt: String!
   updatedAt: String!
+  createdDate: String
+  createdTime: String
 }
 
 type Reservation {
@@ -56,6 +64,18 @@ type Comment {
   updatedAt: String!
 }
 
+type SeeFullPostResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+}
+
+type Query {
+  seeFullPost(postId: String!): SeeFullPostResponse!
+  myProfile: User!
+  seeUser(username: String!): User!
+}
+
 type ConfirmSecretResponse {
   ok: Boolean!
   error: String
@@ -77,11 +97,6 @@ type CreateAccountResponse {
 type EditUserResponse {
   ok: Boolean!
   error: String
-}
-
-type Query {
-  myProfile: User!
-  seeUser(username: String!): User!
 }
 
 type RequestSecretResponse {

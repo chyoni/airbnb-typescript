@@ -1,0 +1,9 @@
+type SeeFullPostResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+}
+
+type Query {
+  seeFullPost(postId: String!): SeeFullPostResponse!
+}
