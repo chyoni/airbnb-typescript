@@ -1,0 +1,8 @@
+type CancelReservationResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  cancelReservation(id: String!): CancelReservationResponse!
+}

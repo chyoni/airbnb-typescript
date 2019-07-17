@@ -7,6 +7,7 @@ type Mutation {
   addComment(postId: String!, text: String!): AddCommentResponse!
   toggleLike(postId: String!): ToggleLikeResponse!
   hostingPost(thumbNail: String!, caption: String!, location: String!, maxPeopleCount: Int!, checkIn: String!, checkOut: String!, price: Int!): HostingPostResponse!
+  cancelReservation(id: String!): CancelReservationResponse!
   makeReservation(postId: String!, guestCount: Int!, arriveAt: String!, leaveAt: String!): MakeReservationResponse!
   confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!
   createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!
@@ -112,6 +113,11 @@ type SeeFullPostResponse {
   ok: Boolean!
   error: String
   post: Post
+}
+
+type CancelReservationResponse {
+  ok: Boolean!
+  error: String
 }
 
 type MakeReservationResponse {
