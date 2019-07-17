@@ -1,4 +1,4 @@
-export const typeDefs = ["type ToggleLikeResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  toggleLike(postId: String!): ToggleLikeResponse!\n  hostingPost(thumbNail: String!, caption: String!, location: String!, maxPeopleCount: Int!, checkIn: String!, checkOut: String!, price: Int!): HostingPostResponse!\n  confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!\n  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!\n  editUser(firstName: String, lastName: String, avatar: String, username: String): EditUserResponse!\n  requestSecret(email: String!): RequestSecretResponse!\n}\n\ntype User {\n  id: ID!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  avatar: String\n  username: String!\n  email: String!\n  loginSecret: String\n  isSelf: Boolean!\n  hostings: [Post!]!\n  reservations: [Reservation!]!\n  likes: [Like!]!\n  comments: [Comment!]!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype Post {\n  id: ID!\n  thumbNail: String!\n  caption: String!\n  location: String!\n  host: User!\n  likes: [Like!]!\n  comments: [Comment!]!\n  isLiked: Boolean!\n  likeCount: Int!\n  commentCount: Int!\n  maxPeopleCount: Int!\n  checkIn: String!\n  checkOut: String!\n  price: Int!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype Reservation {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Like {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Comment {\n  id: ID!\n  text: String!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype HostingPostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype Query {\n  searchPost(term: String!, priceGte: Int, priceLte: Int): [Post!]!\n  seeFeed: [Post!]!\n  seeFullPost(postId: String!): SeeFullPostResponse!\n  myProfile: User!\n  seeUser(username: String!): User!\n}\n\ntype SeeFullPostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype ConfirmSecretResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype CreateAccountResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype RequestSecretResponse {\n  ok: Boolean!\n  error: String\n}\n"];
+export const typeDefs = ["type AddCommentResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  addComment(postId: String!, text: String!): AddCommentResponse!\n  toggleLike(postId: String!): ToggleLikeResponse!\n  hostingPost(thumbNail: String!, caption: String!, location: String!, maxPeopleCount: Int!, checkIn: String!, checkOut: String!, price: Int!): HostingPostResponse!\n  confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!\n  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!\n  editUser(firstName: String, lastName: String, avatar: String, username: String): EditUserResponse!\n  requestSecret(email: String!): RequestSecretResponse!\n}\n\ntype ToggleLikeResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: ID!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  avatar: String\n  username: String!\n  email: String!\n  loginSecret: String\n  isSelf: Boolean!\n  hostings: [Post!]!\n  reservations: [Reservation!]!\n  likes: [Like!]!\n  comments: [Comment!]!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype Post {\n  id: ID!\n  thumbNail: String!\n  caption: String!\n  location: String!\n  host: User!\n  likes: [Like!]!\n  comments: [Comment!]!\n  isLiked: Boolean!\n  likeCount: Int!\n  commentCount: Int!\n  maxPeopleCount: Int!\n  checkIn: String!\n  checkOut: String!\n  price: Int!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype Reservation {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype Like {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype Comment {\n  id: ID!\n  text: String!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype HostingPostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype Query {\n  searchPost(term: String!, priceGte: Int, priceLte: Int): [Post!]!\n  seeFeed: [Post!]!\n  seeFullPost(postId: String!): SeeFullPostResponse!\n  myProfile: User!\n  seeUser(username: String!): User!\n}\n\ntype SeeFullPostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype ConfirmSecretResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype CreateAccountResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype RequestSecretResponse {\n  ok: Boolean!\n  error: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -70,6 +70,8 @@ export interface Reservation {
   user: User;
   createdAt: string;
   updatedAt: string;
+  createdDate: string | null;
+  createdTime: string | null;
 }
 
 export interface Like {
@@ -78,6 +80,8 @@ export interface Like {
   user: User;
   createdAt: string;
   updatedAt: string;
+  createdDate: string | null;
+  createdTime: string | null;
 }
 
 export interface Comment {
@@ -87,6 +91,8 @@ export interface Comment {
   user: User;
   createdAt: string;
   updatedAt: string;
+  createdDate: string | null;
+  createdTime: string | null;
 }
 
 export interface SeeFullPostResponse {
@@ -96,12 +102,18 @@ export interface SeeFullPostResponse {
 }
 
 export interface Mutation {
+  addComment: AddCommentResponse;
   toggleLike: ToggleLikeResponse;
   hostingPost: HostingPostResponse;
   confirmSecret: ConfirmSecretResponse;
   createAccount: CreateAccountResponse;
   editUser: EditUserResponse;
   requestSecret: RequestSecretResponse;
+}
+
+export interface AddCommentMutationArgs {
+  postId: string;
+  text: string;
 }
 
 export interface ToggleLikeMutationArgs {
@@ -139,6 +151,11 @@ export interface EditUserMutationArgs {
 
 export interface RequestSecretMutationArgs {
   email: string;
+}
+
+export interface AddCommentResponse {
+  ok: boolean;
+  error: string | null;
 }
 
 export interface ToggleLikeResponse {

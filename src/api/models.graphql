@@ -45,6 +45,8 @@ type Reservation {
   user: User!
   createdAt: String!
   updatedAt: String!
+  createdDate: String
+  createdTime: String
 }
 
 type Like {
@@ -53,6 +55,8 @@ type Like {
   user: User!
   createdAt: String!
   updatedAt: String!
+  createdDate: String
+  createdTime: String
 }
 
 type Comment {
@@ -62,4 +66,6 @@ type Comment {
   user: User!
   createdAt: String!
   updatedAt: String!
+  createdDate: String
+  createdTime: String
 }

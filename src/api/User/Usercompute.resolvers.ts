@@ -25,12 +25,12 @@ export default {
       }
     },
     createdDate: async (parent): Promise<string> => {
-      const createdAt = await prisma.post({ id: parent.id }).createdAt();
+      const createdAt = await prisma.user({ id: parent.id }).createdAt();
       const [date] = createdAt.split("T");
       return date;
     },
     createdTime: async (parent): Promise<string> => {
-      const createdAt = await prisma.post({ id: parent.id }).createdAt();
+      const createdAt = await prisma.user({ id: parent.id }).createdAt();
       const [, time] = createdAt.split("T");
       const [realTime] = time.split(".");
       const [h, m, s] = realTime.split(":");
