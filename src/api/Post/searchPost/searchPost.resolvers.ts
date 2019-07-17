@@ -14,6 +14,7 @@ export default {
         return searchPostWithoutPrice;
       } else {
         const searchPostWithPrice = await prisma.posts({
+          orderBy: "createdAt_DESC",
           where: {
             AND: [
               { OR: [{ caption_contains: term }, { location_contains: term }] },

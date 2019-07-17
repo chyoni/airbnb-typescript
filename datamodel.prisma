@@ -34,6 +34,9 @@ type Reservation {
   id: ID! @id
   post: Post! 
   user: User! @relation(name: "ReservesByUser")
+  guestCount: Int!
+  arriveAt: String!
+  leaveAt: String!
   createdAt: DateTime! @createdAt 
   updatedAt: DateTime! @updatedAt
 }

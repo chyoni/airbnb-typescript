@@ -1,0 +1,14 @@
+type MakeReservationResponse {
+  ok: Boolean!
+  error: String
+  reservation: Reservation
+}
+
+type Mutation {
+  makeReservation(
+    postId: String!
+    guestCount: Int!
+    arriveAt: String!
+    leaveAt: String!
+  ): MakeReservationResponse!
+}

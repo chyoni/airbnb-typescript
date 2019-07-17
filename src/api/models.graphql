@@ -43,6 +43,9 @@ type Reservation {
   id: ID!
   post: Post!
   user: User!
+  guestCount: Int!
+  arriveAt: String!
+  leaveAt: String!
   createdAt: String!
   updatedAt: String!
   createdDate: String
