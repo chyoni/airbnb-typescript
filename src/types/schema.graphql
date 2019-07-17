@@ -64,29 +64,37 @@ type Comment {
   updatedAt: String!
 }
 
+type HostingPostResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+}
+
+type Mutation {
+  hostingPost(thumbNail: String!, caption: String!, location: String!, maxPeopleCount: Int!, checkIn: String!, checkOut: String!, price: String!): HostingPostResponse!
+  confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!
+  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!
+  editUser(firstName: String, lastName: String, avatar: String, username: String): EditUserResponse!
+  requestSecret(email: String!): RequestSecretResponse!
+}
+
+type Query {
+  seeFeed: [Post!]!
+  seeFullPost(postId: String!): SeeFullPostResponse!
+  myProfile: User!
+  seeUser(username: String!): User!
+}
+
 type SeeFullPostResponse {
   ok: Boolean!
   error: String
   post: Post
 }
 
-type Query {
-  seeFullPost(postId: String!): SeeFullPostResponse!
-  myProfile: User!
-  seeUser(username: String!): User!
-}
-
 type ConfirmSecretResponse {
   ok: Boolean!
   error: String
   token: String
-}
-
-type Mutation {
-  confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!
-  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!
-  editUser(firstName: String, lastName: String, avatar: String, username: String): EditUserResponse!
-  requestSecret(email: String!): RequestSecretResponse!
 }
 
 type CreateAccountResponse {

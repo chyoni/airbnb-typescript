@@ -1,0 +1,17 @@
+type HostingPostResponse {
+  ok: Boolean!
+  error: String
+  post: Post
+}
+
+type Mutation {
+  hostingPost(
+    thumbNail: String!
+    caption: String!
+    location: String!
+    maxPeopleCount: Int!
+    checkIn: String!
+    checkOut: String!
+    price: String!
+  ): HostingPostResponse!
+}
