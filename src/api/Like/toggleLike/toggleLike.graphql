@@ -1,0 +1,8 @@
+type ToggleLikeResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  toggleLike(postId: String!): ToggleLikeResponse!
+}
