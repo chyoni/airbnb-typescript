@@ -32,7 +32,7 @@ type Post {
   maxPeopleCount: Int!
   checkIn: String!
   checkOut: String!
-  price: String!
+  price: Int!
   createdAt: String!
   updatedAt: String!
   createdDate: String

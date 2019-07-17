@@ -32,7 +32,7 @@ type Post {
   maxPeopleCount: Int!
   checkIn: String!
   checkOut: String!
-  price: String!
+  price: Int!
   createdAt: String!
   updatedAt: String!
   createdDate: String
@@ -71,7 +71,7 @@ type HostingPostResponse {
 }
 
 type Mutation {
-  hostingPost(thumbNail: String!, caption: String!, location: String!, maxPeopleCount: Int!, checkIn: String!, checkOut: String!, price: String!): HostingPostResponse!
+  hostingPost(thumbNail: String!, caption: String!, location: String!, maxPeopleCount: Int!, checkIn: String!, checkOut: String!, price: Int!): HostingPostResponse!
   confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!
   createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!
   editUser(firstName: String, lastName: String, avatar: String, username: String): EditUserResponse!
@@ -79,6 +79,7 @@ type Mutation {
 }
 
 type Query {
+  searchPost(term: String!, priceGte: Int, priceLte: Int): [Post!]!
   seeFeed: [Post!]!
   seeFullPost(postId: String!): SeeFullPostResponse!
   myProfile: User!

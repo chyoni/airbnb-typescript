@@ -12,6 +12,6 @@ type Mutation {
     maxPeopleCount: Int!
     checkIn: String!
     checkOut: String!
-    price: String!
+    price: Int!
   ): HostingPostResponse!
 }

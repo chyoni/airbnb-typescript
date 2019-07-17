@@ -1,11 +1,18 @@
-export const typeDefs = ["type User {\n  id: ID!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  avatar: String\n  username: String!\n  email: String!\n  loginSecret: String\n  isSelf: Boolean!\n  hostings: [Post!]!\n  reservations: [Reservation!]!\n  likes: [Like!]!\n  comments: [Comment!]!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype Post {\n  id: ID!\n  thumbNail: String!\n  caption: String!\n  location: String!\n  host: User!\n  likes: [Like!]!\n  comments: [Comment!]!\n  isLiked: Boolean!\n  likeCount: Int!\n  commentCount: Int!\n  maxPeopleCount: Int!\n  checkIn: String!\n  checkOut: String!\n  price: String!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype Reservation {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Like {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Comment {\n  id: ID!\n  text: String!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype HostingPostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype Mutation {\n  hostingPost(thumbNail: String!, caption: String!, location: String!, maxPeopleCount: Int!, checkIn: String!, checkOut: String!, price: String!): HostingPostResponse!\n  confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!\n  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!\n  editUser(firstName: String, lastName: String, avatar: String, username: String): EditUserResponse!\n  requestSecret(email: String!): RequestSecretResponse!\n}\n\ntype Query {\n  seeFeed: [Post!]!\n  seeFullPost(postId: String!): SeeFullPostResponse!\n  myProfile: User!\n  seeUser(username: String!): User!\n}\n\ntype SeeFullPostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype ConfirmSecretResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype CreateAccountResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype RequestSecretResponse {\n  ok: Boolean!\n  error: String\n}\n"];
+export const typeDefs = ["type User {\n  id: ID!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  avatar: String\n  username: String!\n  email: String!\n  loginSecret: String\n  isSelf: Boolean!\n  hostings: [Post!]!\n  reservations: [Reservation!]!\n  likes: [Like!]!\n  comments: [Comment!]!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype Post {\n  id: ID!\n  thumbNail: String!\n  caption: String!\n  location: String!\n  host: User!\n  likes: [Like!]!\n  comments: [Comment!]!\n  isLiked: Boolean!\n  likeCount: Int!\n  commentCount: Int!\n  maxPeopleCount: Int!\n  checkIn: String!\n  checkOut: String!\n  price: Int!\n  createdAt: String!\n  updatedAt: String!\n  createdDate: String\n  createdTime: String\n}\n\ntype Reservation {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Like {\n  id: ID!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Comment {\n  id: ID!\n  text: String!\n  post: Post!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype HostingPostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype Mutation {\n  hostingPost(thumbNail: String!, caption: String!, location: String!, maxPeopleCount: Int!, checkIn: String!, checkOut: String!, price: Int!): HostingPostResponse!\n  confirmSecret(email: String!, loginSecret: String!): ConfirmSecretResponse!\n  createAccount(username: String!, email: String!, firstName: String!, lastName: String!): CreateAccountResponse!\n  editUser(firstName: String, lastName: String, avatar: String, username: String): EditUserResponse!\n  requestSecret(email: String!): RequestSecretResponse!\n}\n\ntype Query {\n  searchPost(term: String!, priceGte: Int, priceLte: Int): [Post!]!\n  seeFeed: [Post!]!\n  seeFullPost(postId: String!): SeeFullPostResponse!\n  myProfile: User!\n  seeUser(username: String!): User!\n}\n\ntype SeeFullPostResponse {\n  ok: Boolean!\n  error: String\n  post: Post\n}\n\ntype ConfirmSecretResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype CreateAccountResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype RequestSecretResponse {\n  ok: Boolean!\n  error: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
+  searchPost: Array<Post>;
   seeFeed: Array<Post>;
   seeFullPost: SeeFullPostResponse;
   myProfile: User;
   seeUser: User;
+}
+
+export interface SearchPostQueryArgs {
+  term: string;
+  priceGte: number | null;
+  priceLte: number | null;
 }
 
 export interface SeeFullPostQueryArgs {
@@ -30,7 +37,7 @@ export interface Post {
   maxPeopleCount: number;
   checkIn: string;
   checkOut: string;
-  price: string;
+  price: number;
   createdAt: string;
   updatedAt: string;
   createdDate: string | null;
@@ -103,7 +110,7 @@ export interface HostingPostMutationArgs {
   maxPeopleCount: number;
   checkIn: string;
   checkOut: string;
-  price: string;
+  price: number;
 }
 
 export interface ConfirmSecretMutationArgs {
