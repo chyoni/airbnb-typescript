@@ -43,7 +43,7 @@ export default {
             arriveAt,
             leaveAt
           });
-          await createNotification(user.id, reserve.id);
+          await createNotification(user.id, reserve.id, "MAKE");
           return {
             ok: true,
             error: null,

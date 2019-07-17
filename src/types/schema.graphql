@@ -96,28 +96,35 @@ type Comment {
   createdTime: String
 }
 
+enum NoteType {
+  MAKE
+  CANCEL
+}
+
 type Notification {
   id: ID!
   user: User!
-  reservation: Reservation!
+  reservation: Reservation
+  type: NoteType!
   createdAt: String!
   updatedAt: String!
   createdDate: String
   createdTime: String
 }
 
-type HostingPostResponse {
-  ok: Boolean!
-  error: String
-  post: Post
-}
-
 type Query {
+  seeNotification: [Notification!]!
   searchPost(term: String!, priceGte: Int, priceLte: Int): [Post!]!
   seeFeed: [Post!]!
   seeFullPost(postId: String!): SeeFullPostResponse!
   myProfile: User!
   seeUser(username: String!): User!
+}
+
+type HostingPostResponse {
+  ok: Boolean!
+  error: String
+  post: Post
 }
 
 type SeeFullPostResponse {

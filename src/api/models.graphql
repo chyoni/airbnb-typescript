@@ -74,10 +74,16 @@ type Comment {
   createdTime: String
 }
 
+enum NoteType {
+  MAKE
+  CANCEL
+}
+
 type Notification {
   id: ID!
   user: User!
-  reservation: Reservation!
+  reservation: Reservation
+  type: NoteType!
   createdAt: String!
   updatedAt: String!
   createdDate: String

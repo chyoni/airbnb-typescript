@@ -62,7 +62,8 @@ type Comment {
 type Notification {
   id: ID! @id
   user: User! @relation(name: "NotificationOfUser")
-  reservation: Reservation!
+  reservation: Reservation
+  type: String!
   createdAt: DateTime! @createdAt 
   updatedAt: DateTime! @updatedAt
 }
