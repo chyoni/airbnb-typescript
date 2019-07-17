@@ -34,6 +34,7 @@ type User {
   reservations: [Reservation!]!
   likes: [Like!]!
   comments: [Comment!]!
+  notifications: [Notification!]!
   createdAt: String!
   updatedAt: String!
   createdDate: String
@@ -89,6 +90,16 @@ type Comment {
   text: String!
   post: Post!
   user: User!
+  createdAt: String!
+  updatedAt: String!
+  createdDate: String
+  createdTime: String
+}
+
+type Notification {
+  id: ID!
+  user: User!
+  reservation: Reservation!
   createdAt: String!
   updatedAt: String!
   createdDate: String

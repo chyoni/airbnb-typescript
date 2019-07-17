@@ -3,6 +3,7 @@ import {
   MakeReservationResponse
 } from "src/types/graph";
 import { prisma } from "../../../../generated/prisma-client";
+import { createNotification } from "../../../../src/api/Notification/createNotification";
 
 export default {
   Mutation: {
@@ -42,6 +43,7 @@ export default {
             arriveAt,
             leaveAt
           });
+          await createNotification(user.id, reserve.id);
           return {
             ok: true,
             error: null,

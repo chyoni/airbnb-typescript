@@ -10,6 +10,7 @@ type User {
   reservations: [Reservation!]! @relation(name: "ReservesByUser", onDelete: CASCADE)
   likes: [Like!]! @relation(name: "LikesByUser", onDelete: CASCADE)
   comments: [Comment!]! @relation(name: "CommentsByUser", onDelete: CASCADE)
+  notifications: [Notification!]! @relation(name: "NotificationOfUser", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt 
 }
@@ -58,3 +59,10 @@ type Comment {
   updatedAt: DateTime! @updatedAt
 }
 
+type Notification {
+  id: ID! @id
+  user: User! @relation(name: "NotificationOfUser")
+  reservation: Reservation!
+  createdAt: DateTime! @createdAt 
+  updatedAt: DateTime! @updatedAt
+}

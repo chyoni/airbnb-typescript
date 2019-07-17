@@ -1,5 +1,11 @@
 import { prisma, FragmentableArray } from "../../../generated/prisma-client";
-import { Post, Reservation, Like, Comment } from "src/types/graph";
+import {
+  Post,
+  Reservation,
+  Like,
+  Comment,
+  Notification
+} from "src/types/graph";
 
 export default {
   User: {
@@ -14,6 +20,9 @@ export default {
     },
     comments: (parent): FragmentableArray<Comment> => {
       return prisma.user({ id: parent.id }).comments();
+    },
+    notifications: (parent): FragmentableArray<Notification> => {
+      return prisma.user({ id: parent.id }).notifications();
     },
     fullName: (parent): string => `${parent.firstName} ${parent.lastName}`,
     isSelf: (parent, __, { request }): boolean => {
