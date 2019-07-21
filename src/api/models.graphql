@@ -28,6 +28,7 @@ type Post {
   likes: [Like!]!
   comments: [Comment!]!
   isLiked: Boolean!
+  isCommented: Boolean!
   likeCount: Int!
   commentCount: Int!
   maxPeopleCount: Int!

@@ -10,10 +10,14 @@ import {
 export default {
   User: {
     hostings: (parent): FragmentableArray<Post> => {
-      return prisma.user({ id: parent.id }).hostings();
+      return prisma
+        .user({ id: parent.id })
+        .hostings({ orderBy: "createdAt_DESC" });
     },
     reservations: (parent): FragmentableArray<Reservation> => {
-      return prisma.user({ id: parent.id }).reservations();
+      return prisma
+        .user({ id: parent.id })
+        .reservations({ orderBy: "createdAt_DESC" });
     },
     likes: (parent): FragmentableArray<Like> => {
       return prisma.user({ id: parent.id }).likes();
@@ -22,7 +26,9 @@ export default {
       return prisma.user({ id: parent.id }).comments();
     },
     notifications: (parent): FragmentableArray<Notification> => {
-      return prisma.user({ id: parent.id }).notifications();
+      return prisma
+        .user({ id: parent.id })
+        .notifications({ orderBy: "createdAt_DESC" });
     },
     fullName: (parent): string => `${parent.firstName} ${parent.lastName}`,
     isSelf: (parent, __, { request }): boolean => {

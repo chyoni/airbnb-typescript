@@ -19,6 +19,13 @@ export default {
       });
       return existLike;
     },
+    isCommented: async (parent, __, { request }): Promise<boolean> => {
+      const { user } = request;
+      const existComment = await prisma.$exists.comment({
+        AND: [{ post: { id: parent.id } }, { user: { id: user.id } }]
+      });
+      return existComment;
+    },
     likeCount: async (parent): Promise<number> => {
       const likeCount = await prisma
         .likesConnection({ where: { post: { id: parent.id } } })
